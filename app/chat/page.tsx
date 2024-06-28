@@ -9,7 +9,13 @@ import * as React from "react";
 import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Pesan, TemplatePertanyaan} from "@/app/chat/interfaces";
-import {templatePertanyaanIndonesia} from "@/app/chat/constants";
+import {
+    templatePertanyaanIndonesia,
+    salamPembuka,
+    kalimatBantuan,
+    templatePertanyaanJawa,
+    templatePertanyaanBali, templatePertanyaanSunda, placeholderInput
+} from "@/app/chat/constants";
 import {GoLaw} from "react-icons/go";
 import {RiServiceFill} from "react-icons/ri";
 import {FaDatabase} from "react-icons/fa6";
@@ -17,6 +23,7 @@ import {SendIcon} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Input} from "@/components/ui/input";
+import {Skeleton} from "@/components/ui/skeleton";
 
 function ChatContent() {
     const searchParams = useSearchParams();
@@ -35,16 +42,16 @@ function ChatContent() {
                 setTemplate(templatePertanyaanIndonesia);
                 break;
             case "jawa":
-                setTemplate(templatePertanyaanIndonesia);
+                setTemplate(templatePertanyaanJawa);
                 break;
             case "bali":
-                setTemplate(templatePertanyaanIndonesia);
+                setTemplate(templatePertanyaanBali);
                 break;
             case "sunda":
-                setTemplate(templatePertanyaanIndonesia);
+                setTemplate(templatePertanyaanSunda);
                 break;
             default:
-                router.push('/')
+                setTemplate(templatePertanyaanIndonesia);
                 break;
         }
 
@@ -82,7 +89,6 @@ function ChatContent() {
             'sender': 'bot'
         }])
 
-        loadingQuery;
     }
 
     return loading ? (
@@ -106,9 +112,9 @@ function ChatContent() {
                     }}
                     className="text-3xl px-4 md:text-4xl font-semibold text-neutral-700 dark:text-white max-w-4xl leading-relaxed xl:leading-snug"
                 >
-                    Selamat pagi, {" "}
+                    {salamPembuka[bahasa]}, {" "}
                     <Highlight className="text-black dark:text-white">
-                        Trisurya.
+                        Trisurya!
                     </Highlight>
                 </motion.h2>
                 <motion.h2
@@ -126,7 +132,7 @@ function ChatContent() {
                     }}
                     className="text-3xl px-4 md:text-4xl font-normal text-neutral-600 dark:text-slate-400 max-w-4xl leading-relaxed xl:leading-snug"
                 >
-                    Apa yang saya bisa bantu hari ini?
+                    {kalimatBantuan[bahasa]}
                 </motion.h2>
             </section>
             <ScrollArea className="max-w-[100vw] w-full pt-4 px-6 md:pt-7 md:px-10 lg:pt-12 lg:px-16">
@@ -156,15 +162,15 @@ function ChatContent() {
                 </div>
                 <ScrollBar orientation="horizontal"/>
             </ScrollArea>
-            <div className="flex flex-col gap-4  px-6 md:px-10 lg:px-16">
+            <div className="flex flex-col gap-4 px-6 pt-4 md:pt-0 md:px-10 lg:px-16">
                 {conversation.map((chat, index) => (
                     <div
                         key={index}
                         className={"flex items-start gap-3"}
                     >
-                        <Avatar className="w-8 h-8 border">
-                            <AvatarImage src="/placeholder-user.jpg"/>
-                            <AvatarFallback>{chat.sender === "bot" ? "CB" : "YU"}</AvatarFallback>
+                        <Avatar className="w-8 h-8">
+                            <AvatarImage src={chat.sender === "bot" ? "/trisurya-logo.png" : ""}/>
+                            <AvatarFallback>{chat.sender === "bot" ? "TS" : "CS"}</AvatarFallback>
                         </Avatar>
                         <div className={chat.sender === "bot" ?
                             "bg-muted rounded-lg p-3 max-w-[75%]" : "bg-primary rounded-lg p-3 max-w-[75%] text-primary-foreground"}>
@@ -172,10 +178,21 @@ function ChatContent() {
                         </div>
                     </div>
                 ))}
+                {loadingQuery ? (
+                    <div className="flex items-start space-x-3">
+                        <Avatar className="w-8 h-8">
+                            <AvatarImage src="/trisurya-logo.png"/>
+                            <AvatarFallback>TS</AvatarFallback>
+                        </Avatar>
+                        <div className="space-y-2">
+                            <Skeleton className="h-12 w-80 p-3 max-w-[75%]"/>
+                        </div>
+                    </div>
+                ) : <></>}
             </div>
             <div className='fixed bottom-8 px-6 md:px-10 lg:px-16 w-full'>
                 <Input
-                    placeholder="Tanyakan apa saja..."
+                    placeholder={placeholderInput[bahasa]}
                     className="rounded-2xl"
                     value={curQuery}
                     onChange={e => setCurQuery(e.target.value)}
@@ -193,7 +210,7 @@ function ChatContent() {
                         setCurQuery('')
                         await handleKirimPesan(curQuery)
                     }}
-                    className="absolute right-[70px] bottom-[1px] hover:bg-transparent hover:text-white">
+                    className="absolute right-[30px] md:right-[50px] lg:right-[70px] bottom-[1px] hover:bg-transparent hover:text-white">
                     <SendIcon size={15} />
                 </Button>
             </div>

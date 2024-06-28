@@ -49,7 +49,7 @@ export default function Home() {
                     }}
                     className="text-3xl px-4 md:text-5xl font-semibold text-neutral-700 dark:text-white max-w-4xl leading-relaxed xl:leading-snug text-center mx-auto "
                 >
-                    Informasi dan Pelayanan Publik Terpercaya {" "}
+                    Informasi dan Pelayanan Publik Tepercaya {" "}
                     <Highlight className="text-black font-bold dark:text-white">
                         Trisurya.
                     </Highlight>

@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8448bb6-f242-4dab-b02d-fe9112e263a9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/trisurya-logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/chat/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/chat/constants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/chat/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/chat/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/app/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +33,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/User/Documents/gemastok/trisurya",
+    "last_opened_file_path": "C:/Users/User/Documents/gemastok/trisurya/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -42,6 +46,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Documents\gemastok\trisurya\public" />
+      <recent name="C:\Users\User\Documents\gemastok\trisurya\app" />
       <recent name="C:\Users\User\Documents\gemastok\trisurya" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -92,7 +98,10 @@
       <workItem from="1719519162011" duration="747000" />
       <workItem from="1719541853345" duration="6846000" />
       <workItem from="1719553735594" duration="2482000" />
-      <workItem from="1719556380663" duration="4979000" />
+      <workItem from="1719556380663" duration="6265000" />
+      <workItem from="1719564895127" duration="3279000" />
+      <workItem from="1719573764595" duration="2342000" />
+      <workItem from="1719578044702" duration="1598000" />
     </task>
     <servers />
   </component>
