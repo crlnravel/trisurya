@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 
 import {Highlight} from "@/components/ui/hero-highlight";
@@ -18,7 +18,7 @@ import {Button} from "@/components/ui/button";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Input} from "@/components/ui/input";
 
-export default function Chat() {
+function ChatContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -60,13 +60,15 @@ export default function Chat() {
             'sender': 'user'
         }])
 
+
         const backendUri = process.env.NEXT_PUBLIC_BACKEND_API ?? '';
+        console.log(backendUri)
 
         const res = await fetch(backendUri, {
             method: 'POST',
-            mode: "no-cors",
             headers: {
-                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 "bahasa": bahasa,
@@ -179,8 +181,8 @@ export default function Chat() {
                     onChange={e => setCurQuery(e.target.value)}
                     onKeyUp={async e => {
                         if (e.key === "Enter") {
-                            await handleKirimPesan(curQuery)
                             setCurQuery('')
+                            await handleKirimPesan(curQuery)
                         }
                     }}
                 />
@@ -188,13 +190,21 @@ export default function Chat() {
                     variant="ghost"
                     size="icon"
                     onClick={async () => {
-                        await handleKirimPesan(curQuery)
                         setCurQuery('')
+                        await handleKirimPesan(curQuery)
                     }}
                     className="absolute right-[70px] bottom-[1px] hover:bg-transparent hover:text-white">
                     <SendIcon size={15} />
                 </Button>
             </div>
         </main>
+    );
+}
+
+export default function Chat() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ChatContent />
+        </Suspense>
     );
 }
