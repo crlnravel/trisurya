@@ -89,6 +89,8 @@ function ChatContent() {
             'sender': 'bot'
         }])
 
+        setLoadingQuery(false)
+
     }
 
     return loading ? (
