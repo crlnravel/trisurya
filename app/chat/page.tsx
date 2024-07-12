@@ -59,6 +59,10 @@ function ChatContent() {
     }, [bahasa, router])
 
     const handleKirimPesan = async (query: string) => {
+        // Block empty query
+        if (!query) {
+            return;
+        }
         setLoadingQuery(true)
 
         setTemplate([])
